@@ -1,0 +1,8 @@
+{
+    "name": "nemoe7 repo",
+    "description": "",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/nemoe7/cloudstream-repo/refs/heads/builds/plugins.json"
+    ]
+  }

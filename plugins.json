@@ -1,0 +1,47 @@
+[
+    {
+        "iconUrl": "https://animepahe.ru/favicon-96x96.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cloudstream-repo",
+        "fileSize": 24626,
+        "status": 3,
+        "language": "en",
+        "authors": [
+            "nemoe7"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 1,
+        "internalName": "SimklMeta",
+        "description": "Animes (SUB/DUB)",
+        "url": "https://raw.githubusercontent.com/nemoe7/cloudstream-repo/builds/SimklMeta.cs3",
+        "name": "SimklMeta"
+    },
+    {
+        "iconUrl": "https://vidsrc.me/template/vidsrc-ico.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cloudstream-repo",
+        "fileSize": 1434,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "nemoe7"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Anime",
+            "Movie",
+            "Cartoon",
+            "AnimeMovie"
+        ],
+        "version": 1,
+        "internalName": "VidSrc",
+        "description": "VidSrc",
+        "url": "https://raw.githubusercontent.com/nemoe7/cloudstream-repo/builds/VidSrc.cs3",
+        "name": "VidSrc"
+    }
+]
