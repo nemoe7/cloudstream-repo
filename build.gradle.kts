@@ -37,12 +37,12 @@ subprojects {
     apply(plugin = "com.lagradost.cloudstream3.gradle")
 
     cloudstream {
-        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/nemoe7/cs3-phisher-modded")
-        authors = listOf("Phisher98", "nemoe7")
+        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/nemoe7/cloudstream-repo")
+        authors = listOf("nemoe7")
     }
 
     android {
-        namespace = "com.phisher98"
+        namespace = "com.nemo"
 
         defaultConfig {
             minSdk = 21
