@@ -10,20 +10,23 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object SimklAPI {
-  private var userAccessToken: String? = null
+  private const val API_KEY = BuildConfig.SIMKL_API_KEY
+  private const val LIB_PKG_NAME = BuildConfig.LIBRARY_PACKAGE_NAME
   private const val BASE_URL = "https://api.simkl.com/"
-  private val headers = mapOf(
+  private var userAccessToken: String? = null
+
+  private val headers get() = mapOf(
     "Content-Type" to "application/json",
-    "Authorization" to "Bearer ${BuildConfig.TEMP_AT}",
-    "simkl-api-key" to BuildConfig.SIMKL_API_KEY
+    "Authorization" to "Bearer $userAccessToken",
+    "simkl-api-key" to API_KEY
   )
 
   fun init(context: Context? = null) {
     val sharedPreferences = context?.getSharedPreferences(
-      BuildConfig.LIBRARY_PACKAGE_NAME, Context.MODE_PRIVATE
+      LIB_PKG_NAME, Context.MODE_PRIVATE
     )
 
-    userAccessToken = sharedPreferences?.getString("userToken", null)
+    userAccessToken = sharedPreferences?.getString("userAccessToken", null)
   }
 
   suspend fun get(url: String = "", params: Map<String, String> = emptyMap()): NiceResponse {

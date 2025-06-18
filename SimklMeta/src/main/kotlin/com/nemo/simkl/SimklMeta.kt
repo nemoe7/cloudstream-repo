@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.lagradost.cloudstream3.MainAPI
 import com.lagradost.cloudstream3.TvType
 
-open class Simkl(val sharedPreferences: SharedPreferences) : MainAPI() {
+open class SimklMeta(val sharedPreferences: SharedPreferences) : MainAPI() {
 
   override var name = "Simkl"
   override var hasQuickSearch = true

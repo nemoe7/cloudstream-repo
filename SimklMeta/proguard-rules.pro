@@ -21,6 +21,7 @@
 
 
 
+-repackageclasses
 
 # Keep constructors, getters and setters
 # needed for json de/serialization unless you target your classes directly
