@@ -29,4 +29,7 @@ open class StandardMediaObject(
   fun setOtherKeys(key: String, value: Any?) {
     _otherKeys[key] = value
   }
+
+  override fun toString(): String =
+    "StandardMediaObject(title=$title, poster=$poster, year=$year, ids=$ids, otherProperties=$otherKeys)"
 }
