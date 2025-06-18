@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * - `anime`: Anime
  * - `movie`: Movies
  *
- * The `endpoint` property returns the endpoint that should be used for searching the specified type.
+ * The `endpoint` property returns the endpoint that should be used when searching the specified type.
  */
 enum class Type(private val value: String, val endpoint: String) {
   @JsonProperty("tv")
