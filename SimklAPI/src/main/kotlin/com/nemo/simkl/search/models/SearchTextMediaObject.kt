@@ -1,5 +1,6 @@
 package com.nemo.simkl.search.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.nemo.simkl.models.Id
 import com.nemo.simkl.models.StandardMediaObject
@@ -25,8 +26,11 @@ class SearchTextMediaObject(
   @JsonProperty("ids") ids: Id = Id(),
   @JsonProperty("status") val status: Status? = null,
   @JsonProperty("ep_count") val epCount: Int? = null,
-  @JsonProperty("endpoint_type") val endpointType: String
-) : StandardMediaObject(title, poster, year, ids) {
+  @JsonProperty("endpoint_type") val endpointType: Type
+) : StandardMediaObject(title, poster, year, endpointType, ids) {
+  @JsonIgnore
+  override val type: Type = endpointType
+
   override fun toString(): String =
     "SearchTextMediaObject(title=$title, poster=$poster, year=$year, ids=$ids, status=$status, epCount=$epCount, endpointType=$endpointType, otherProperties=${otherKeys.keys})"
 }

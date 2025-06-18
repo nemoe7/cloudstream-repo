@@ -4,19 +4,23 @@ import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.nemo.simkl.SimklAPI.IMAGE_BASE_URL
+import com.nemo.simkl.search.models.Type
 
 /**
- * Represents a standard media object in the Simkl API.
+ * A media object with standard properties.
  *
- * @param title The title of the media item.
- * @param poster The poster image URL of the media item.
- * @param year The year of the media item.
- * @param ids The IDs of the media item.
+ * @property title The title of the media object.
+ * @property poster The poster image URL of the media object.
+ * @property year The year of the media object.
+ * @property type The type of the media object.
+ * @property ids The IDs of the media object.
+ * @property otherKeys Any additional keys that are not in the standard schema.
  */
 open class StandardMediaObject(
   @JsonProperty("title") val title: String? = null,
   @JsonProperty("poster") private val _poster: String? = null,
   @JsonProperty("year") val year: Int? = null,
+  @JsonProperty("type") open val type: Type? = null,
   @JsonProperty("ids") val ids: Id = Id(),
 
   @JsonIgnore private val _otherKeys: MutableMap<String, Any?> = mutableMapOf()
@@ -31,5 +35,5 @@ open class StandardMediaObject(
   }
 
   override fun toString(): String =
-    "StandardMediaObject(title=$title, poster=$poster, year=$year, ids=$ids, otherProperties=$otherKeys)"
+    "StandardMediaObject(title=$title, poster=$poster, year=$year, type=$type, ids=$ids, otherKeys=${otherKeys.keys})"
 }
