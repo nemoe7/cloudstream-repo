@@ -7,26 +7,6 @@ import com.fasterxml.jackson.annotation.JsonValue
 import com.nemo.simkl.SimklAPI
 import java.time.LocalDateTime
 
-@RequiresApi(Build.VERSION_CODES.O)
-suspend fun SimklAPI.getAllItems(
-  type: Type? = null,
-  status: Status? = null,
-  dateFrom: LocalDateTime? = null,
-  extended: Extended? = null,
-  episodeWatchedAt: Boolean = false,
-  memos: Boolean = false
-): Response {
-  val params = buildMap {
-    dateFrom?.let { put("date_from", it.toDateTimeString()) }
-    extended?.let { put("extended", it.value) }
-    if (episodeWatchedAt) put("episode_watched_at", "yes")
-    if (memos) put("memos", "yes")
-  }
-  return get(
-    url = "/sync/all-items" + "/${type ?: ""}" + "/${status ?: ""}", params = params
-  ).parsed<Response>()
-}
-
 // Possible values: shows, movies, anime.
 enum class Type(@get:JsonValue val value: String) {
   @JsonProperty("movies")
