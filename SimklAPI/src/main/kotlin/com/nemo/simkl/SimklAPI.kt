@@ -10,9 +10,11 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object SimklAPI {
-  private const val API_KEY = BuildConfig.SIMKL_API_KEY
+  internal const val API_KEY = BuildConfig.SIMKL_API_KEY
+  internal const val IMAGE_BASE_URL = "https://wsrv.nl/?url=https://simkl.in"
+
   private const val LIB_PKG_NAME = BuildConfig.LIBRARY_PACKAGE_NAME
-  private const val BASE_URL = "https://api.simkl.com/"
+  private const val BASE_URL = "https://api.simkl.com"
   private var userAccessToken: String? = null
 
   private val headers get() = mapOf(
@@ -30,10 +32,10 @@ object SimklAPI {
   }
 
   suspend fun get(url: String = "", params: Map<String, String> = emptyMap()): NiceResponse {
-    Log.d("SimklAPI", "GET $url, headers: $headers, params: $params")
     val response = app.get(
       url = BASE_URL + url, headers = headers, params = params
     )
+    Log.d("SimklAPI", "GET ${response.url} (${response.code}): $response")
     return response
   }
 

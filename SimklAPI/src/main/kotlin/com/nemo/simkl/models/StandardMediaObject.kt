@@ -1,27 +1,32 @@
 package com.nemo.simkl.models
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.nemo.simkl.SimklAPI.IMAGE_BASE_URL
 
-data class StandardMediaObject(
+/**
+ * Represents a standard media object in the Simkl API.
+ *
+ * @param title The title of the media item.
+ * @param poster The poster image URL of the media item.
+ * @param year The year of the media item.
+ * @param ids The IDs of the media item.
+ */
+open class StandardMediaObject(
   @JsonProperty("title") val title: String? = null,
-  @JsonProperty("poster") val poster: String? = null,
+  @JsonProperty("poster") private val _poster: String? = null,
   @JsonProperty("year") val year: Int? = null,
-  @JsonProperty("runtime") val runtime: Int? = null,
-  @JsonProperty("ids") val ids: Ids = Ids(),
+  @JsonProperty("ids") val ids: Id = Id(),
 
-  @JsonIgnore private val otherProperties: MutableMap<String, Any?> = mutableMapOf()
+  @JsonIgnore private val _otherKeys: MutableMap<String, Any?> = mutableMapOf()
 ) {
+  val poster: String? get() = _poster?.let { "$IMAGE_BASE_URL/posters/${it}_m.jpg" }
+
+  val otherKeys: Map<String, Any?> get() = _otherKeys
+
   @JsonAnySetter
-  fun setOtherProperty(key: String, value: Any?) {
-    otherProperties[key] = value
+  fun setOtherKeys(key: String, value: Any?) {
+    _otherKeys[key] = value
   }
-
-  fun getOtherProperties(): Map<String, Any?> = otherProperties
 }
-
-data class Ids(
-  @JsonProperty("ids")
-  val ids: Map<String, String?> = emptyMap()
-)
