@@ -22,12 +22,10 @@ suspend fun SimklAPI.media(
 ): StandardMediaObject {
   val id = media.ids.simkl ?: media.ids.imdb
   ?: throw IllegalArgumentException("Id.simkl or Id.imdb cannot be null")
-  val mediaType = type ?: media.type
-
+  val mediaType = type ?: media.type ?: throw IllegalArgumentException("Type cannot be null")
   when (mediaType) {
-    Type.EPISODE -> throw IllegalArgumentException("Type cannot be EPISODE")
-    Type.SPECIAL -> throw IllegalArgumentException("Type cannot be SPECIAL")
-    null -> throw IllegalArgumentException("Type cannot be null")
+    Type.EPISODE, Type.SPECIAL ->
+      throw IllegalArgumentException("Type cannot be ${mediaType.name}")
     else -> {}
   }
 
