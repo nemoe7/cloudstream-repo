@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * @property livechart The LiveChart ID for the media item, if available.
  * @property anisearch The AniSearch ID for the media item, if available.
  * @property animeplanet The AnimePlanet ID for the media item, if available.
- * @property otherIds A map holding additional identifiers not explicitly defined as part of the standard schema.
+ * @property _otherIds A map holding additional identifiers not explicitly defined as part of the standard schema.
  *   These can provide additional metadata that extends beyond what is captured in predefined fields.
  */
 data class Id(
@@ -42,7 +42,8 @@ data class Id(
   @JsonProperty("livechart") val livechart: String? = null,
   @JsonProperty("anisearch") val anisearch: String? = null,
   @JsonProperty("animeplanet") val animeplanet: String? = null,
-  @JsonIgnore private val otherIds: MutableMap<String, String?> = mutableMapOf()
+
+  @JsonIgnore private val _otherIds: MutableMap<String, String?> = mutableMapOf()
 ) {
   companion object {
     const val SIMKL = "simkl"
@@ -82,12 +83,13 @@ data class Id(
 
   @JsonAnySetter
   fun setOtherIds(key: String, value: String?) {
-    otherIds[key] = value
+    _otherIds[key] = value
   }
 
-  fun getOtherIds(): Map<String, Any?> = otherIds
+  fun containsKey(key: String): Boolean =
+    key in TYPES || _otherIds.containsKey(key)
 
-  fun getId(key: String): String? = when (key) {
+  operator fun get(key: String): String? = when (key) {
     "simkl" -> simkl
     "slug" -> slug
     "hulu" -> hulu
@@ -103,31 +105,19 @@ data class Id(
     "livechart" -> livechart
     "anisearch" -> anisearch
     "animeplanet" -> animeplanet
-    else -> otherIds[key]
+    else -> _otherIds[key]
   }
 
   override fun toString(): String {
     val sb = StringBuilder()
     sb.append("Id(")
-    if (simkl != null) sb.append("simkl=$simkl, ")
-    if (slug != null) sb.append("slug=$slug, ")
-    if (hulu != null) sb.append("hulu=$hulu, ")
-    if (netflix != null) sb.append("netflix=$netflix, ")
-    if (mal != null) sb.append("mal=$mal, ")
-    if (tvdb != null) sb.append("tvdb=$tvdb, ")
-    if (tmdb != null) sb.append("tmdb=$tmdb, ")
-    if (imdb != null) sb.append("imdb=$imdb, ")
-    if (anidb != null) sb.append("anidb=$anidb, ")
-    if (crunchyroll != null) sb.append("crunchyroll=$crunchyroll, ")
-    if (anilist != null) sb.append("anilist=$anilist, ")
-    if (kitsu != null) sb.append("kitsu=$kitsu, ")
-    if (livechart != null) sb.append("livechart=$livechart, ")
-    if (anisearch != null) sb.append("anisearch=$anisearch, ")
-    if (animeplanet != null) sb.append("animeplanet=$animeplanet, ")
-    if (otherIds.isNotEmpty()) sb.append("otherIds=${otherIds.keys}, ")
-    sb.delete(sb.length - 2, sb.length)
+    TYPES.forEach { type ->
+      val v = this[type]
+      if (v != null) sb.append("$type=$v, ")
+    }
+    if (_otherIds.isNotEmpty()) sb.append("otherIds=${_otherIds.keys}, ")
+    if (sb.endsWith(", ")) sb.delete(sb.length - 2, sb.length)
     sb.append(")")
     return sb.toString()
   }
-
 }
