@@ -21,16 +21,16 @@ import com.nemo.simkl.models.StandardMediaObject
  */
 class SearchTextMediaObject(
   @JsonProperty("title") title: String? = null,
-  @JsonProperty("poster") poster: String? = null,
+  @JsonProperty("poster") posterRaw: String? = null,
   @JsonProperty("year") year: Int? = null,
   @JsonProperty("ids") ids: Id = Id(),
   @JsonProperty("status") val status: Status? = null,
   @JsonProperty("ep_count") val epCount: Int? = null,
   @JsonProperty("endpoint_type") val endpointType: Type
-) : StandardMediaObject(title, poster, year, endpointType, ids) {
+) : StandardMediaObject(title, posterRaw, year, endpointType, ids) {
   @JsonIgnore
   override val type: Type = endpointType
 
   override fun toString(): String =
-    "SearchTextMediaObject(title=$title, poster=$_poster, year=$year, ids=$ids, status=$status, epCount=$epCount, endpointType=$endpointType, otherProperties=${otherKeys.keys})"
+    "SearchTextMediaObject(title=$title, poster=$posterRaw, year=$year, ids=$ids, status=$status, epCount=$epCount, endpointType=$endpointType, otherProperties=${otherKeys.keys})"
 }

@@ -19,12 +19,12 @@ import com.nemo.simkl.models.StandardMediaObject
  */
 class SearchIdMediaObject(
   @JsonProperty("title") title: String? = null,
-  @JsonProperty("poster") poster: String? = null,
+  @JsonProperty("poster") posterRaw: String? = null,
   @JsonProperty("year") year: Int? = null,
   @JsonProperty("ids") ids: Id = Id(),
   @JsonProperty("type") type: Type? = null,
   @JsonProperty("status") val status: Status? = null
-) : StandardMediaObject(title, poster, year, type, ids) {
+) : StandardMediaObject(title, posterRaw, year, type, ids) {
   override fun toString(): String =
-    "SearchIdMediaObject(title=$title, poster=$_poster, year=$year, ids=$ids, type=$type, status=$status, otherProperties=$otherKeys)"
+    "SearchIdMediaObject(title=$title, poster=$posterRaw, year=$year, ids=$ids, type=$type, status=$status, otherProperties=$otherKeys)"
 }
