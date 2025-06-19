@@ -25,8 +25,8 @@ open class StandardMediaObject(
 
   @JsonIgnore private val _otherKeys: MutableMap<String, Any?> = mutableMapOf()
 ) {
-  fun poster(
-    suffix: PosterSuffix = PosterSuffix.M, extension: PosterExtension = PosterExtension.JPG
+  final fun poster(
+    suffix: PosterSuffix = PosterSuffix.M, extension: ImageExtension = ImageExtension.JPG
   ): String = "$IMAGE_BASE_URL/$posterRaw$suffix$extension"
 
   val otherKeys: Map<String, Any?> get() = _otherKeys
