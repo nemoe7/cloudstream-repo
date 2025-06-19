@@ -32,5 +32,5 @@ class SearchTextMediaObject(
   override val type: Type = endpointType
 
   override fun toString(): String =
-    "SearchTextMediaObject(title=$title, poster=$poster, year=$year, ids=$ids, status=$status, epCount=$epCount, endpointType=$endpointType, otherProperties=${otherKeys.keys})"
+    "SearchTextMediaObject(title=$title, poster=$_poster, year=$year, ids=$ids, status=$status, epCount=$epCount, endpointType=$endpointType, otherProperties=${otherKeys.keys})"
 }

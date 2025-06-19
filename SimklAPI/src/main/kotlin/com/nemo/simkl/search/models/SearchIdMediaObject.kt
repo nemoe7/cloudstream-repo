@@ -26,5 +26,5 @@ class SearchIdMediaObject(
   @JsonProperty("status") val status: Status? = null
 ) : StandardMediaObject(title, poster, year, type, ids) {
   override fun toString(): String =
-    "SearchIdMediaObject(title=$title, poster=$poster, year=$year, ids=$ids, type=$type, status=$status, otherProperties=$otherKeys)"
+    "SearchIdMediaObject(title=$title, poster=$_poster, year=$year, ids=$ids, type=$type, status=$status, otherProperties=$otherKeys)"
 }

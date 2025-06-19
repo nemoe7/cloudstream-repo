@@ -18,14 +18,16 @@ import com.nemo.simkl.search.models.Type
  */
 open class StandardMediaObject(
   @JsonProperty("title") val title: String? = null,
-  @JsonProperty("poster") private val _poster: String? = null,
+  @JsonProperty("poster") protected val _poster: String? = null,
   @JsonProperty("year") val year: Int? = null,
   @JsonProperty("type") open val type: Type? = null,
   @JsonProperty("ids") val ids: Id = Id(),
 
   @JsonIgnore private val _otherKeys: MutableMap<String, Any?> = mutableMapOf()
 ) {
-  val poster: String? get() = _poster?.let { "$IMAGE_BASE_URL/posters/${it}_m.jpg" }
+  fun poster(
+    suffix: PosterSuffix = PosterSuffix.M, extension: PosterExtension = PosterExtension.JPG
+  ): String = "$IMAGE_BASE_URL/$_poster$suffix$extension"
 
   val otherKeys: Map<String, Any?> get() = _otherKeys
 
@@ -34,6 +36,10 @@ open class StandardMediaObject(
     _otherKeys[key] = value
   }
 
+  fun containsKey(key: String): Boolean = _otherKeys.containsKey(key)
+
+  operator fun get(key: String): Any? = _otherKeys[key]
+
   override fun toString(): String =
-    "StandardMediaObject(title=$title, poster=$poster, year=$year, type=$type, ids=$ids, otherKeys=${otherKeys.keys})"
+    "StandardMediaObject(title=$title, poster=$_poster, year=$year, type=$type, ids=$ids, otherKeys=${otherKeys.keys})"
 }
