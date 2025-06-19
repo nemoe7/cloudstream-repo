@@ -10,11 +10,11 @@ import com.nemo.simkl.search.searchId
  * Fetch detailed media information from the Simkl API.
  *
  * @param media A [StandardMediaObject] containing identifiers.
- * @param type [Type] of the media. (optional, defaults to [media]`.type`)
+ * @param type [Type] of the media. (optional; defaults to [media]`.type`)
  *   Valid types are: [Type.TV], [Type.ANIME], [Type.MOVIE].
  * @param extended Whether to fetch extended information (optional, defaults to `false`).
  * @return A [StandardMediaObject] populated with the requested details.
- * @throws IllegalArgumentException If [type] is [Type.EPISODE], [Type.SPECIAL], or null
+ * @throws IllegalArgumentException If [type] is [Type.EPISODE], [Type.SPECIAL], or `null`
  *   or if the requested media could not be found.
  */
 suspend fun SimklAPI.media(
@@ -48,7 +48,7 @@ suspend fun SimklAPI.media(
  *   Valid types are: [Type.TV], [Type.ANIME], [Type.MOVIE].
  * @param extended Whether to fetch extended information (optional, defaults to `false`).
  * @return A [StandardMediaObject] populated with the requested details.
- * @throws IllegalArgumentException If [type] is [Type.EPISODE], [Type.SPECIAL], or null
+ * @throws IllegalArgumentException If [type] is [Type.EPISODE], [Type.SPECIAL], or `null`
  *   or if the requested media could not be found.
  */
 suspend fun SimklAPI.media(
@@ -69,7 +69,7 @@ suspend fun SimklAPI.media(
  *   Valid types are: [Type.TV], [Type.ANIME], [Type.MOVIE].
  * @param extended Whether to fetch extended information (optional, defaults to `false`).
  * @return A [StandardMediaObject] populated with the requested details.
- * @throws IllegalArgumentException If [type] is [Type.EPISODE], [Type.SPECIAL], or null
+ * @throws IllegalArgumentException If [type] is [Type.EPISODE], [Type.SPECIAL], or `null`
  *   or if the requested media could not be found.
  */
 suspend fun SimklAPI.media(
