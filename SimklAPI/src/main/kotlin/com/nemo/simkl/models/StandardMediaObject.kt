@@ -19,7 +19,7 @@ import com.nemo.simkl.search.models.Type
 open class StandardMediaObject(
   @JsonProperty("title") val title: String? = null,
   @JsonProperty("poster") protected val posterRaw: String? = null,
-  @JsonProperty("year") val year: Int? = null,
+  @JsonProperty("year") open val year: Int? = null,
   @JsonProperty("type") open val type: Type? = null,
   @JsonProperty("ids") val ids: Id = Id(),
 

@@ -51,6 +51,7 @@ suspend fun SimklAPI.searchText(
   extended: Boolean = false
 ): List<SearchTextResult> {
   if (type == Type.EPISODE) throw IllegalArgumentException("Type cannot be EPISODE")
+  if (type == Type.SPECIAL) throw IllegalArgumentException("Type cannot be SPECIAL")
   val res = get(
     url = "/search/$type", params = buildMap {
       put("q", text)
