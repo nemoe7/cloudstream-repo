@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  *   These can provide additional metadata that extends beyond what is captured in predefined fields.
  */
 data class Id(
-  @JsonAlias("simkl_id") @JsonProperty("simkl") val simkl: String? = null,
+  @JsonAlias("simkl_id") @JsonProperty("simkl") val simkl: Int? = null,
   @JsonProperty("slug") val slug: String? = null,
   @JsonProperty("hulu") val hulu: String? = null,
   @JsonProperty("netflix") val netflix: String? = null,
@@ -90,7 +90,7 @@ data class Id(
     key in TYPES || _otherIds.containsKey(key)
 
   operator fun get(key: String): String? = when (key) {
-    "simkl" -> simkl
+    "simkl" -> simkl.toString()
     "slug" -> slug
     "hulu" -> hulu
     "netflix" -> netflix

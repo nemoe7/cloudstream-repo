@@ -44,12 +44,11 @@ suspend fun SimklAPI.media(
 suspend fun SimklAPI.media(
   simklId: Int, type: Type? = null, extended: Boolean = false
 ): StandardMediaObject {
-  val simklIdString = simklId.toString()
   val mediaType =
-    type ?: searchId(Id.SIMKL, simklIdString).firstOrNull()?.type ?: throw IllegalArgumentException(
+    type ?: searchId(Id.SIMKL, simklId).firstOrNull()?.type ?: throw IllegalArgumentException(
       "Could not determine type of ${Id.SIMKL}:$simklId"
     )
-  return media(StandardMediaObject(ids = Id(simkl = simklIdString)), mediaType, extended)
+  return media(StandardMediaObject(ids = Id(simkl = simklId)), mediaType, extended)
 }
 
 /**
