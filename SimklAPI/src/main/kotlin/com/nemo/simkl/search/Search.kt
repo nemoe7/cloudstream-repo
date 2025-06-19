@@ -3,6 +3,7 @@ package com.nemo.simkl.search
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.nemo.simkl.SimklAPI
+import com.nemo.simkl.models.Id
 import com.nemo.simkl.search.models.SearchIdMediaObject
 import com.nemo.simkl.search.models.SearchTextMediaObject
 import com.nemo.simkl.search.models.Type
@@ -10,14 +11,15 @@ import com.nemo.simkl.search.models.Type
 /**
  * Search for a media item by id.
  *
- * @param type The type of media to search for.
+ * @param source The source of the id to search for.
  * @param id The id of the media item to search for.
  * @return A list of search results.
  */
-suspend fun SimklAPI.searchId(type: String, id: String): List<SearchIdMediaObject> {
+suspend fun SimklAPI.searchId(source: String, id: String): List<SearchIdMediaObject> {
+  if (source !in Id.TYPES) throw IllegalArgumentException("Type must be one of ${Id.TYPES.joinToString(", ")}")
   val res = get(
     url = "/search/id", params = mapOf(
-      type to id, "client_id" to API_KEY
+      source to id, "client_id" to API_KEY
     )
   )
   return jacksonObjectMapper().readValue(
@@ -27,7 +29,7 @@ suspend fun SimklAPI.searchId(type: String, id: String): List<SearchIdMediaObjec
 /**
  * Search for a media item by id.
  *
- * @param type The type of media to search for.
+ * @param type The source of the id to search for.
  * @param id The id of the media item to search for.
  * @return A list of search results.
  */
@@ -48,6 +50,7 @@ suspend fun SimklAPI.searchText(
   text: String,
   extended: Boolean = false
 ): List<SearchTextMediaObject> {
+  if (type == Type.EPISODE) throw IllegalArgumentException("Type cannot be EPISODE")
   val res = get(
     url = "/search/$type", params = buildMap {
       put("q", text)

@@ -25,7 +25,11 @@ enum class Type(private val value: String, val endpoint: String) {
 
   @JsonAlias("movies")
   @JsonProperty("movie")
-  MOVIE("movie", "movies");
+  MOVIE("movie", "movies"),
+
+  @JsonAlias("special")
+  @JsonProperty("episode")
+  EPISODE("episode", "episodes");
 
   override fun toString(): String = value
 
