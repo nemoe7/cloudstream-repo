@@ -7,6 +7,8 @@ import com.lagradost.api.Log
 import com.lagradost.cloudstream3.app
 import com.lagradost.nicehttp.NiceResponse
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 object SimklAPI {
@@ -41,7 +43,8 @@ object SimklAPI {
 
   @RequiresApi(Build.VERSION_CODES.O)
   internal fun String.toDateTime(): LocalDateTime {
-    return LocalDateTime.parse(this, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    val odt = OffsetDateTime.parse(this, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+    return odt.atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
   }
 
   @RequiresApi(Build.VERSION_CODES.O)
