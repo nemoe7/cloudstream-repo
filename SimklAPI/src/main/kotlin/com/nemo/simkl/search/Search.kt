@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.nemo.simkl.SimklAPI
 import com.nemo.simkl.models.Id
-import com.nemo.simkl.search.models.SearchIdMediaObject
-import com.nemo.simkl.search.models.SearchTextMediaObject
+import com.nemo.simkl.search.models.SearchIdResult
+import com.nemo.simkl.search.models.SearchTextResult
 import com.nemo.simkl.search.models.Type
 
 /**
@@ -15,7 +15,7 @@ import com.nemo.simkl.search.models.Type
  * @param id The id of the media item to search for.
  * @return A list of search results.
  */
-suspend fun SimklAPI.searchId(source: String, id: String): List<SearchIdMediaObject> {
+suspend fun SimklAPI.searchId(source: String, id: String): List<SearchIdResult> {
   if (source !in Id.TYPES) throw IllegalArgumentException("Type must be one of ${Id.TYPES.joinToString(", ")}")
   val res = get(
     url = "/search/id", params = mapOf(
@@ -23,7 +23,7 @@ suspend fun SimklAPI.searchId(source: String, id: String): List<SearchIdMediaObj
     )
   )
   return jacksonObjectMapper().readValue(
-    res.text, object : TypeReference<List<SearchIdMediaObject>>() {})
+    res.text, object : TypeReference<List<SearchIdResult>>() {})
 }
 
 /**
@@ -33,7 +33,7 @@ suspend fun SimklAPI.searchId(source: String, id: String): List<SearchIdMediaObj
  * @param id The id of the media item to search for.
  * @return A list of search results.
  */
-suspend fun SimklAPI.searchId(type: String, id: Int): List<SearchIdMediaObject> =
+suspend fun SimklAPI.searchId(type: String, id: Int): List<SearchIdResult> =
   SimklAPI.searchId(type, id.toString())
 
 
@@ -49,7 +49,7 @@ suspend fun SimklAPI.searchText(
   type: Type,
   text: String,
   extended: Boolean = false
-): List<SearchTextMediaObject> {
+): List<SearchTextResult> {
   if (type == Type.EPISODE) throw IllegalArgumentException("Type cannot be EPISODE")
   val res = get(
     url = "/search/$type", params = buildMap {
@@ -58,5 +58,5 @@ suspend fun SimklAPI.searchText(
       if (extended) put("extended", "full")
     })
   return jacksonObjectMapper().readValue(
-    res.text, object : TypeReference<List<SearchTextMediaObject>>() {})
+    res.text, object : TypeReference<List<SearchTextResult>>() {})
 }

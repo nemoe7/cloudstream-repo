@@ -17,7 +17,7 @@ import com.nemo.simkl.models.StandardMediaObject
  * @property otherKeys A map holding dynamic properties not explicitly defined as part of the standard schema.
  *   These can provide additional metadata that extends beyond what is captured in predefined fields.
  */
-class SearchIdMediaObject(
+class SearchIdResult(
   @JsonProperty("title") title: String? = null,
   @JsonProperty("poster") posterRaw: String? = null,
   @JsonProperty("year") year: Int? = null,
