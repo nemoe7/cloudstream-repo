@@ -38,6 +38,22 @@ open class StandardMediaObject(
 
   fun containsKey(key: String): Boolean = _otherKeys.containsKey(key)
 
+  fun copy(
+    title: String? = this.title,
+    posterRaw: String? = this.posterRaw,
+    year: Int? = this.year,
+    type: Type? = this.type,
+    ids: Id = this.ids,
+    otherKeys: Map<String, Any?> = this.otherKeys
+  ) = StandardMediaObject(
+    title = title,
+    posterRaw = posterRaw,
+    year = year,
+    type = type,
+    ids = ids,
+    _otherKeys = otherKeys.toMutableMap()
+  )
+
   operator fun get(key: String): Any? = _otherKeys[key]
 
   override fun toString(): String =
