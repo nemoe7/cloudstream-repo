@@ -61,5 +61,16 @@ class Episode(
 
   @RequiresApi(Build.VERSION_CODES.O)
   override fun toString(): String =
-    "Episode(title=$title, poster=$posterRaw, year=$year, type=$type, ids=$ids, dateString=$dateString, aired=$aired, episode=$episode, description=$description)"
+    "Episode(" +
+      "title=$title, " +
+      "poster=$posterRaw, " +
+      "year=$year, " +
+      "type=$type, " +
+      "ids=$ids, " +
+      "date=$date, " +
+      "aired=$aired, " +
+      "episode=$episode, " +
+      "description=$description, " +
+      "otherKeys=${otherKeys.keys}" +
+      ")"
 }
