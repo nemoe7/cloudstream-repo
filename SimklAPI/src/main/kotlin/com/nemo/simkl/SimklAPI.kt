@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter
 
 object SimklAPI {
   internal const val API_KEY = BuildConfig.SIMKL_API_KEY
+  private const val API_SECRET = BuildConfig.SIMKL_API_SECRET
   internal const val IMAGE_BASE_URL = "https://wsrv.nl/?url=https://simkl.in"
 
   private const val LIB_PKG_NAME = BuildConfig.LIBRARY_PACKAGE_NAME
