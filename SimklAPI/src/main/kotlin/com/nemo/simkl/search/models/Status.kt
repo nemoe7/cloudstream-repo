@@ -27,9 +27,7 @@ enum class Status(private val value: String) {
   @JsonProperty("airing")
   AIRING("airing"),
 
-  @JsonProperty("premiere")
-  PREMIERE("premiere"),
-
+  @JsonAlias("premiere")
   @JsonProperty("released")
   RELEASED("released"),
 
