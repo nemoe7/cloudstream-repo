@@ -75,7 +75,13 @@ open class StandardMediaObject(
     return true
   }
 
-  override fun hashCode(): Int = listOf(title, posterRaw, type).hashCode()
+  override fun hashCode(): Int {
+    var result = title.hashCode()
+    result = 31 * result + posterRaw.hashCode()
+    result = 31 * result + type.hashCode()
+    return result
+  }
+
 
   override fun toString(): String =
     "StandardMediaObject(title=$title, poster=$posterRaw, year=$year, type=$type, ids=$ids, otherKeys=${otherKeys.keys})"
