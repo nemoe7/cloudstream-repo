@@ -27,7 +27,17 @@ open class StandardMediaObject(
 ) {
   open fun poster(
     suffix: PosterSuffix = PosterSuffix.M, extension: ImageExtension = ImageExtension.JPG
-  ): String = "$IMAGE_BASE_URL/$posterRaw$suffix$extension"
+  ): String {
+    if (posterRaw == null) {
+      val hash = hashCode()
+      if (hash % 2 == 0) {
+        return "https://i.pinimg.com/736x/9f/df/ac/9fdfac631732e0a2c63eca1d8c7352a6.jpg"
+      } else {
+        return "https://i.pinimg.com/736x/bb/0e/c3/bb0ec3d5987cff5c6bf8699b0d4e53b2.jpg"
+      }
+    }
+    return "$IMAGE_BASE_URL/$posterRaw$suffix$extension"
+  }
 
   val otherKeys: Map<String, Any?> get() = _otherKeys
 
@@ -55,6 +65,17 @@ open class StandardMediaObject(
   )
 
   operator fun get(key: String): Any? = _otherKeys[key]
+
+  override fun equals(other: Any?): Boolean {
+    if (this === other) return true
+    if (other !is StandardMediaObject) return false
+    if (title != other.title) return false
+    if (posterRaw != other.posterRaw) return false
+    if (type != other.type) return false
+    return true
+  }
+
+  override fun hashCode(): Int = listOf(title, posterRaw, type).hashCode()
 
   override fun toString(): String =
     "StandardMediaObject(title=$title, poster=$posterRaw, year=$year, type=$type, ids=$ids, otherKeys=${otherKeys.keys})"
