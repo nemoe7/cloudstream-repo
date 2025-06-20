@@ -23,7 +23,7 @@ open class StandardMediaObject(
   @JsonProperty("type") open val type: Type? = null,
   @JsonProperty("ids") val ids: Id = Id(),
 
-  @JsonIgnore private val _otherKeys: MutableMap<String, Any?> = mutableMapOf()
+  @JsonIgnore protected val _otherKeys: MutableMap<String, Any?> = mutableMapOf()
 ) {
   open fun poster(
     suffix: PosterSuffix = PosterSuffix.M, extension: ImageExtension = ImageExtension.JPG
@@ -47,22 +47,6 @@ open class StandardMediaObject(
   }
 
   fun containsKey(key: String): Boolean = _otherKeys.containsKey(key)
-
-  fun copy(
-    title: String? = this.title,
-    posterRaw: String? = this.posterRaw,
-    year: Int? = this.year,
-    type: Type? = this.type,
-    ids: Id = this.ids,
-    otherKeys: Map<String, Any?> = this.otherKeys
-  ) = StandardMediaObject(
-    title = title,
-    posterRaw = posterRaw,
-    year = year,
-    type = type,
-    ids = ids,
-    _otherKeys = otherKeys.toMutableMap()
-  )
 
   operator fun get(key: String): Any? = _otherKeys[key]
 
