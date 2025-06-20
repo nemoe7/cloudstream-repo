@@ -1,6 +1,7 @@
 package com.nemo.simkl.media
 
 import com.nemo.simkl.SimklAPI
+import com.nemo.simkl.media.models.ExtendedMediaObject
 import com.nemo.simkl.models.Id
 import com.nemo.simkl.models.StandardMediaObject
 import com.nemo.simkl.search.models.Type
@@ -19,7 +20,7 @@ import com.nemo.simkl.search.searchId
  */
 suspend fun SimklAPI.media(
   media: StandardMediaObject, type: Type? = null, extended: Boolean = false
-): StandardMediaObject {
+): ExtendedMediaObject {
   val id = media.ids.simkl ?: media.ids.imdb
   ?: throw IllegalArgumentException("Id.simkl or Id.imdb cannot be null")
   val mediaType = type ?: media.type ?: throw IllegalArgumentException("Type cannot be null")
@@ -35,7 +36,7 @@ suspend fun SimklAPI.media(
       if (extended) put("extended", "full")
     })
 
-  return res.parsed<StandardMediaObject>()
+  return res.parsed<ExtendedMediaObject>()
 }
 
 /**
@@ -51,7 +52,7 @@ suspend fun SimklAPI.media(
  */
 suspend fun SimklAPI.media(
   simklId: Int, type: Type? = null, extended: Boolean = false
-): StandardMediaObject {
+): ExtendedMediaObject {
   val mediaType =
     type ?: searchId(Id.SIMKL, simklId).firstOrNull()?.type ?: throw IllegalArgumentException(
       "Could not determine type of ${Id.SIMKL}:$simklId"
@@ -72,7 +73,7 @@ suspend fun SimklAPI.media(
  */
 suspend fun SimklAPI.media(
   imdbId: String, type: Type? = null, extended: Boolean = false
-): StandardMediaObject {
+): ExtendedMediaObject {
   val mediaType = type ?: searchId(Id.IMDB, imdbId).firstOrNull()?.type
   ?: throw IllegalArgumentException("Could not determine type of ${Id.IMDB}:$imdbId")
   return media(StandardMediaObject(ids = Id(imdb = imdbId)), mediaType, extended)
