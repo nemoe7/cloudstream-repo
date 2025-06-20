@@ -21,8 +21,14 @@ enum class Status(private val value: String) {
   @JsonProperty("tba")
   TBA("tba"),
 
+  @JsonProperty("ongoing")
+  ONGOING("ongoing"),
+
   @JsonProperty("airing")
   AIRING("airing"),
+
+  @JsonProperty("premiere")
+  PREMIERE("premiere"),
 
   @JsonProperty("released")
   RELEASED("released"),
